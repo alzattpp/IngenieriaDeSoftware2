@@ -1,20 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package taller7;
 
-/**
- *
- * @author alzat
- */
+import java.util.Date;
+
 public class Taller7 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Orden orden = new Orden(new Date(), "MANIZALES", "BOGOTA");
+
+        IProcesarOrdenDHL servicioDHL = new ProcesarOrdenDHLImpl();
+        SistemaEnvios sistemaEnviosDHL = new SistemaEnvios(servicioDHL);
+        sistemaEnviosDHL.enviarOrden(orden);
+
+        IProcesarOrdenFedex servicioFedEx = new ProcesarOrdenFedexImpl();
+        SistemaEnvios sistemaEnviosFedEx = new SistemaEnvios(servicioFedEx);
+        sistemaEnviosFedEx.enviarOrden(orden);
+
+        IProcesarOrdenUPS servicioUPS = new ProcesarOrdenUPSImpl();
+        SistemaEnvios sistemaEnviosUPS = new SistemaEnvios(servicioUPS);
+        sistemaEnviosUPS.enviarOrden(orden);
     }
-    
 }
